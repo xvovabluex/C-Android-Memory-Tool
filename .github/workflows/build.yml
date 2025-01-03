@@ -1,0 +1,30 @@
+name: Build C++ Project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up C++ environment
+      run: sudo apt-get install g++ -y
+
+    - name: Build the project
+      run: |
+        g++ -o memory_tool main.cpp -I. # Adjust the command if you have multiple source files or directories
+
+    - name: Upload the executable
+      uses: actions/upload-artifact@v2
+      with:
+        name: memory_tool
+        path: memory_tool
