@@ -4,7 +4,7 @@
 
 int main() {
     MemoryTool memory_tool;
-    const char* game_package = "com.axlebolt.standoff2";
+    char game_package[] = "com.tencent.ig";
 
     int pid = memory_tool.getPID(game_package);
     if (pid == -1) {
