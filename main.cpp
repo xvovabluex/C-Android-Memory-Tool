@@ -36,19 +36,17 @@ int main() {
     long int target_address = base_address + offset;
 
     unsigned char current_value;
-    if (memory_tool.MemoryRead(target_address, &current_value, sizeof(current_value))) {
+    if (memory_tool.MemoryRead(reinterpret_cast<char*>(target_address), &current_value, sizeof(current_value))) {
         std::cout << "Current value at offset: " << (int)current_value << std::endl;
-    }
-    else {
-        std::cerr << "Failed to read memory at target address." << std::endl;
+    } else {
+        std::cerr << "Failed to read memory at target address." std::cerr << "Failed to read memory at target address." << std::endl;
         return 1;
     }
 
-    unsigned char new_value = 0x00, 0x00, 0x00, 0x3E, 0x32, 0xF3, 0x2F, 0xE1, 0xF0, 0x41, 0x2D, 0xE9, 0xA0, 0xD0, 0x4D, 0xE2;
-    if (memory_tool.MemoryWrite(target_address, &new_value, sizeof(new_value))) {
+    unsigned char new_value[] = {0x00, 0x00, 0x00, 0x3E, 0x32, 0xF3, 0x2F, 0xE1, 0xF0, 0x41, 0x2D, 0xE9, 0xA0, 0xD0, 0x4D, 0xE2};
+    if (memory_tool.MemoryWrite(reinterpret_cast<char*>(target_address), new_value, sizeof(new_value))) {
         std::cout << "Successfully wrote new value to memory." << std::endl;
-    }
-    else {
+    } else {
         std::cerr << "Failed to write memory at target address." << std::endl;
         return 1;
     }
