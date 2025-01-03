@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3  # Updated to v3
 
     - name: Set up C++ environment
       run: sudo apt-get install g++ -y
@@ -24,7 +24,7 @@ jobs:
         g++ -o memory_tool main.cpp -I. # Adjust the command if you have multiple source files or directories
 
     - name: Upload the executable
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3  # Updated to v3
       with:
         name: memory_tool
         path: memory_tool
